@@ -1,0 +1,36 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: mlops-challenge
+
+servers: 1
+agents: 2
+
+image: rancher/k3s:latest
+
+kubeAPI:
+  host: "127.0.0.1"
+  hostPort: "6550"
+
+ports:
+  - port: 8080:80
+    nodeFilters:
+      - loadbalancer
+  - port: 8443:443
+    nodeFilters:
+      - loadbalancer
+
+options:
+  k3d:
+    wait: true
+    timeout: "120s"
+    disableLoadbalancer: false
+    disableImageVolume: false
+  k3s:
+    extraArgs:
+      - arg: "--disable=traefik"
+        nodeFilters:
+          - server:*
+      - arg: "--disable=metrics-server"
+        nodeFilters:
+          - server:*
