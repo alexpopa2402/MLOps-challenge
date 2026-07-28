@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadtester
+  namespace: loadtester
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loadtester
+  template:
+    metadata:
+      labels:
+        app: loadtester
+    spec:
+      containers:
+        - name: loadtester
+          image: ghcr.io/mirceanton/loadtester@sha256:abdc38e829a2ac93dbe7f874af3626e59508e769a8604031c48d8056fad3ace6
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
