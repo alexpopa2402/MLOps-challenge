@@ -4,4 +4,4 @@
 
 **Repo:** https://github.com/alexpopa2402/MLOps-challenge
 
-# **Status:** Cluster and Flux foundation working.
+# **WIP status:** Cluster, Flux, ingress-nginx, loadtester (unprotected, / + /burn).
