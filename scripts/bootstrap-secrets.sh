@@ -22,7 +22,7 @@ DEMO_USER_PASSWORD=$(openssl rand -base64 18 | tr -d '\n')
 DEMO_USER_EMAIL=demo@example.com
 OAUTH2_PROXY_CLIENT_ID=loadtester
 OAUTH2_PROXY_CLIENT_SECRET=$(openssl rand -hex 32)
-OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -base64 32 | tr -d '\n')
+OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -hex 16)
 EOF
   chmod 600 "$ENV_FILE"
   echo "Generated $ENV_FILE"
