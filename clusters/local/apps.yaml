@@ -12,6 +12,7 @@ spec:
   wait: true
   dependsOn:
     - name: controllers
+    - name: oauth2-proxy # so we dont't publish an ingress that points at an auth service which flux hasn't yet installed (not necessarily needed but good prevention for race conditions)
   sourceRef:
     kind: GitRepository
     name: flux-system
