@@ -4,6 +4,6 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - service.yaml
-  - bootstrap-admin-secret.yaml
+  - bootstrap-secret.yaml
   - realm-secret.yaml
   - ingress.yaml
