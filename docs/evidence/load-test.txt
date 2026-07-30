@@ -1,0 +1,61 @@
+[metrics] ready=1 pods=1 avg_cpu=0.3m avg_memory=40.0Mi
+[metrics] ready=1 pods=1 avg_cpu=127.6m avg_memory=41.9Mi
+[metrics] ready=3 pods=1 avg_cpu=127.6m avg_memory=41.9Mi
+[metrics] ready=3 pods=1 avg_cpu=127.6m avg_memory=41.9Mi
+[metrics] ready=3 pods=3 avg_cpu=346.6m avg_memory=41.1Mi
+[metrics] ready=3 pods=3 avg_cpu=346.6m avg_memory=41.1Mi
+[metrics] ready=3 pods=3 avg_cpu=346.6m avg_memory=41.1Mi
+[metrics] ready=3 pods=3 avg_cpu=498.6m avg_memory=41.0Mi
+[metrics] ready=6 pods=3 avg_cpu=498.6m avg_memory=41.0Mi
+[metrics] ready=6 pods=3 avg_cpu=498.6m avg_memory=41.0Mi
+[metrics] ready=6 pods=6 avg_cpu=449.2m avg_memory=40.8Mi
+[metrics] ready=6 pods=6 avg_cpu=449.2m avg_memory=40.8Mi
+[metrics] ready=6 pods=6 avg_cpu=449.2m avg_memory=40.8Mi
+[metrics] ready=1 pods=2 avg_cpu=499.4m avg_memory=40.9Mi
+[metrics] ready=3 pods=2 avg_cpu=499.4m avg_memory=40.9Mi
+[metrics] ready=3 pods=2 avg_cpu=499.4m avg_memory=40.9Mi
+[metrics] ready=3 pods=4 avg_cpu=425.7m avg_memory=40.5Mi
+[metrics] ready=6 pods=4 avg_cpu=425.7m avg_memory=40.5Mi
+[metrics] ready=6 pods=3 avg_cpu=460.9m avg_memory=40.8Mi
+[metrics] ready=6 pods=6 avg_cpu=447.4m avg_memory=40.6Mi
+[metrics] ready=6 pods=6 avg_cpu=447.4m avg_memory=40.6Mi
+[metrics] ready=6 pods=6 avg_cpu=447.4m avg_memory=40.6Mi
+[metrics] ready=6 pods=6 avg_cpu=496.6m avg_memory=40.7Mi
+[metrics] ready=6 pods=6 avg_cpu=496.6m avg_memory=40.7Mi
+[metrics] ready=6 pods=6 avg_cpu=496.6m avg_memory=40.7Mi
+[metrics] ready=6 pods=6 avg_cpu=498.3m avg_memory=40.7Mi
+[metrics] ready=6 pods=6 avg_cpu=498.3m avg_memory=40.7Mi
+[metrics] ready=1 pods=3 avg_cpu=499.3m avg_memory=40.8Mi
+[metrics] ready=3 pods=3 avg_cpu=498.8m avg_memory=41.1Mi
+[metrics] ready=3 pods=3 avg_cpu=498.8m avg_memory=41.1Mi
+[metrics] ready=3 pods=3 avg_cpu=498.8m avg_memory=41.1Mi
+[metrics] ready=6 pods=5 avg_cpu=450.6m avg_memory=40.5Mi
+[metrics] ready=6 pods=3 avg_cpu=454.8m avg_memory=40.5Mi
+[metrics] ready=6 pods=3 avg_cpu=454.8m avg_memory=40.5Mi
+[metrics] ready=6 pods=6 avg_cpu=440.1m avg_memory=40.4Mi
+[metrics] ready=6 pods=6 avg_cpu=440.1m avg_memory=40.4Mi
+
+=== Load test summary ===
+Elapsed:             180.58s
+Requests:            8015
+Accepted (202):      32
+Busy (409):          7943
+Other 2xx:           0
+Failed:              40
+Error rate:          0.50%
+Busy rate:           99.10%
+Throughput:          44.38 req/s
+Status distribution: {202: 32, 409: 7943, 502: 38, 504: 2}
+Latency mean:        449.51 ms
+Latency p50:         292.02 ms
+Latency p95:         899.58 ms
+Latency p99:         2096.36 ms
+Latency max:         30094.94 ms
+Ready replicas min:  1
+Ready replicas max:  6
+Ready replicas end:  6
+Average pod CPU:     420.60m
+Peak avg pod CPU:    499.41m
+Average pod memory:  40.84Mi
+
+Note: 409 'already burning' is expected under concurrency — each pod accepts one burn at a time (default BURN_DURATION=30s).
