@@ -48,22 +48,30 @@ spec:
               containerPort: 8080
             - name: management
               containerPort: 9000
+          startupProbe:
+            httpGet:
+              path: /keycloak/realms/master
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30   # up to 5 min for first boot
           readinessProbe:
             httpGet:
               path: /keycloak/realms/master
               port: http
-            initialDelaySeconds: 15
+            #initialDelaySeconds: 15
             periodSeconds: 5
             timeoutSeconds: 3
-            failureThreshold: 24
+            failureThreshold: 6 # up to 30 sec for first boot
           livenessProbe:
             httpGet:
               path: /keycloak/realms/master
               port: http
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 3
-            failureThreshold: 6
+            #initialDelaySeconds: 60
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 6 # up to 2 min for first boot
           resources:
             requests:
               cpu: 300m
