@@ -28,7 +28,7 @@ spec:
             - --email-domain=*
             - --scope=openid profile email
             - --skip-provider-button=true
-            - --skip-jwt-bearer-tokens=true
+            #- --skip-jwt-bearer-tokens=true
             - --reverse-proxy=true
             - --set-xauthrequest=true
             - --pass-access-token=true
