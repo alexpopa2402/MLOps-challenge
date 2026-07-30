@@ -5,3 +5,4 @@ resources:
   - controllers.yaml
   - apps.yaml
   - keycloak.yaml
+  - oauth2-proxy.yaml
