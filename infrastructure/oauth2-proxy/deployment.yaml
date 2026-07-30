@@ -26,6 +26,7 @@ spec:
             - --redirect-url=http://host.k3d.internal:8080/oauth2/callback
             - --upstream=static://202
             - --email-domain=*
+            - --insecure-oidc-allow-unverified-email=true # allow unverified email for JWT bearer auth
             - --scope=openid profile email
             - --skip-provider-button=true
             #- --skip-jwt-bearer-tokens=true
