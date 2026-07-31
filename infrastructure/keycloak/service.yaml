@@ -10,4 +10,4 @@ spec:
   ports:
     - name: http
       port: 8080
-      targetPort: http # http because the containerPort is named "http" in the deployment
+      targetPort: http 

@@ -41,4 +41,3 @@ spec:
         allow-snippet-annotations: "false"
     defaultBackend:
       enabled: false
-

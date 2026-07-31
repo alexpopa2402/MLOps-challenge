@@ -4,7 +4,8 @@ metadata:
   name: controllers
   namespace: flux-system
 spec:
-  interval: 1m # will bring back to 10m later
+  # Temporary DX interval; restore to 10m after active development.
+  interval: 1m
   retryInterval: 1m
   timeout: 10m
   path: ./infrastructure/controllers

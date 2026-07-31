@@ -4,7 +4,8 @@ metadata:
   name: applications
   namespace: flux-system
 spec:
-  interval: 1m # will bring back to 10m later
+  # temporary interval; restore to 10m after active development.
+  interval: 1m
   retryInterval: 1m
   timeout: 10m
   path: ./apps
@@ -12,7 +13,8 @@ spec:
   wait: true
   dependsOn:
     - name: controllers
-    - name: oauth2-proxy # so we dont't publish an ingress that points at an auth service which flux hasn't yet installed (not necessarily needed but good prevention for race conditions)
+    # depends on oauth2-proxy so we dont't publish an ingress that points at an auth service which flux hasn't yet installed (not necessarily needed but good prevention for race conditions)
+    - name: oauth2-proxy
   sourceRef:
     kind: GitRepository
     name: flux-system

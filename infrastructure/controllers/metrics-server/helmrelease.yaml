@@ -25,7 +25,8 @@ spec:
   values:
     replicas: 1
     args:
-      - --kubelet-insecure-tls # not to be used in prod
+      # Local-only: kubelet serving certs are not trusted the same way as prod.
+      - --kubelet-insecure-tls
       - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
     resources:
       requests:

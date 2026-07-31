@@ -55,23 +55,24 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 30   # up to 5 min for first boot
+            # Up to 5 min for first Quarkus/start-dev boot.
+            failureThreshold: 30
           readinessProbe:
             httpGet:
               path: /keycloak/realms/master
               port: http
-            #initialDelaySeconds: 15
             periodSeconds: 5
             timeoutSeconds: 3
-            failureThreshold: 6 # up to 30 sec for first boot
+            # Up to 30s after startupProbe succeeds.
+            failureThreshold: 6
           livenessProbe:
             httpGet:
               path: /keycloak/realms/master
               port: http
-            #initialDelaySeconds: 60
             periodSeconds: 20
             timeoutSeconds: 5
-            failureThreshold: 6 # up to 2 min for first boot
+            # Up to 2 min of failures before restart.
+            failureThreshold: 6
           resources:
             requests:
               cpu: 300m
