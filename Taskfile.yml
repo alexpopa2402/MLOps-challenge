@@ -1,0 +1,73 @@
+version: "3"
+vars:
+  CLUSTER_NAME: mlops-challenge
+tasks:
+  prerequisites:
+    desc: Print required local tool versions
+    cmds:
+      - docker version
+      - kubectl version --client
+      - k3d version
+      - flux version
+      - helm version
+      - python3 --version
+      - task --version
+  cluster:create:
+    desc: Create the local k3d cluster
+    cmds:
+      - k3d cluster create --config cluster/k3d.yaml
+    status:
+      - k3d cluster get {{.CLUSTER_NAME}}
+  cluster:delete:
+    desc: Delete the local k3d cluster
+    cmds:
+      - k3d cluster delete {{.CLUSTER_NAME}}
+  cluster:status:
+    desc: Show nodes and all Pods
+    cmds:
+      - kubectl get nodes -o wide
+      - kubectl get pods -A
+  secrets:
+    desc: Create/update local bootstrap secrets
+    cmds:
+      - ./scripts/bootstrap-secrets.sh
+  flux:status:
+    desc: Show Flux sources, Kustomizations, and Helm releases
+    cmds:
+      - flux get sources git -A
+      - flux get kustomizations -A
+      - flux get helmreleases -A
+  flux:reconcile:
+    desc: Reconcile the source and all layers
+    cmds:
+      - flux reconcile source git flux-system
+      - flux reconcile kustomization controllers
+      - flux reconcile kustomization keycloak
+      - flux reconcile kustomization oauth2-proxy
+      - flux reconcile kustomization applications
+  app:test:
+    desc: Unauthenticated curl to the app (expect OAuth redirect)
+    cmds:
+      - curl -i http://host.k3d.internal:8080/
+  load:test:
+    desc: Run the authenticated load test
+    cmds:
+      - |
+        set -a
+        source .challenge_env
+        set +a
+        python3 scripts/load_test.py --duration 180 --concurrency 20
+  validate:
+    desc: Run local lint and syntax checks
+    cmds:
+      - |
+        if command -v yamllint >/dev/null 2>&1; then
+          yamllint .
+        elif [ -x .venv/bin/yamllint ]; then
+          .venv/bin/yamllint .
+        else
+          echo "yamllint not found; use .venv or: pip install -r requirements-dev.txt" >&2
+          exit 1
+        fi
+      - bash -n scripts/*.sh
+      - python3 -m py_compile scripts/load_test.py
