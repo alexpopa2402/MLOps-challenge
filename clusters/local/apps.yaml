@@ -4,8 +4,7 @@ metadata:
   name: applications
   namespace: flux-system
 spec:
-  # temporary interval; restore to 10m after active development.
-  interval: 1m
+  interval: 10m
   retryInterval: 1m
   timeout: 10m
   path: ./apps
