@@ -71,3 +71,7 @@ tasks:
         fi
       - bash -n scripts/*.sh
       - python3 -m py_compile scripts/load_test.py
+  validate:flux:
+    desc: Offline Flux render/test with flate (flux-local's successor)
+    cmds:
+      - flate test all --path ./clusters/local
