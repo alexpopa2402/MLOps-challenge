@@ -53,3 +53,30 @@ jobs:
         uses: home-operations/flate/action@bf3405a189626478b0aa6ec98dc4d6f7d419df17 # v0.4.12
       - name: Run flate test
         run: flate test all --path ./clusters/local
+
+  kubeconform:
+    name: kubeconform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: v1.35.0
+      - name: Install kubeconform
+        env:
+          KUBECONFORM_VERSION: v0.6.7
+        run: |
+          curl -fsSL "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" \
+            | tar xz
+          sudo mv kubeconform /usr/local/bin/
+          kubeconform -v
+      - name: Validate rendered packages
+        env:
+          K8S_VER: "1.35.0"
+        run: |
+          for d in apps/loadtester infrastructure/keycloak infrastructure/oauth2-proxy; do
+            echo "======== $d ========"
+            kubectl kustomize "$d" | kubeconform -kubernetes-version "$K8S_VER" -summary -strict
+          done

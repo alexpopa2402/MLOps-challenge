@@ -75,3 +75,13 @@ tasks:
     desc: Offline Flux render/test with flate (flux-local's successor)
     cmds:
       - flate test all --path ./clusters/local
+  validate:kube:
+    desc: Schema-check rendered Kustomize packages with kubeconform
+    cmds:
+      - |
+        command -v kubeconform >/dev/null || { echo "kubeconform not on PATH" >&2; exit 1; }
+        K8S_VER="${K8S_VER:-1.35.0}"
+        for d in apps/loadtester infrastructure/keycloak infrastructure/oauth2-proxy; do
+          echo "======== $d ========"
+          kubectl kustomize "$d" | kubeconform -kubernetes-version "$K8S_VER" -summary -strict
+        done
