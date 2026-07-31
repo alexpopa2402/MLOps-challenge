@@ -1,0 +1,22 @@
+extends: default
+
+# Flux bootstrap output — do not hand-edit or lint for style.
+ignore: |
+  clusters/local/flux-system/
+
+rules:
+  line-length:
+    max: 120
+    level: warning
+
+  document-start: disable
+
+  # GitHub Actions uses bare keys like "on:" which truthy would otherwise flag.
+  truthy:
+    allowed-values:
+      - "true"
+      - "false"
+    check-keys: false
+
+  comments:
+    min-spaces-from-content: 1
