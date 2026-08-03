@@ -111,14 +111,19 @@ cd MLOps-challenge
 k3d cluster create --config cluster/k3d.yaml
 # or: task cluster:create
 
-# 2) Host name for browser + in-cluster OIDC
-grep -qE '(^|[[:space:]])host\.k3d\.internal([[:space:]]|$)' /etc/hosts \
-  || echo '127.0.0.1 host.k3d.internal' | sudo tee -a /etc/hosts
+# 2) The app and OIDC URLs use host.k3d.internal:8080, so that name must resolve on your machine. Check with:
+grep host.k3d.internal /etc/hosts. 
+# If it’s missing, add it manually or with:
+echo '127.0.0.1 host.k3d.internal' | sudo tee -a /etc/hosts
 
 # 3) Flux bootstrap (imperative, once per cluster)
-export GITHUB_TOKEN="$(gh auth token)"
+
+# 3.1 Need a logged-in GitHub CLI first
+gh auth login
+# 3.2 Set the gh CLI token and username:
+export GITHUB_TOKEN="$(gh auth token)" 
 export GITHUB_USER="$(gh api user --jq .login)"
-# Point --owner/--repository at this public repo (or your fork).
+# 3.3 Point --owner/--repository at this public repo (or your fork).
 flux bootstrap github \
   --owner="$GITHUB_USER" \
   --repository="MLOps-challenge" \
