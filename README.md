@@ -295,7 +295,7 @@ Verified: delete cluster → recreate from `cluster/k3d.yaml` → Flux bootstrap
 - Metrics Server `--kubelet-insecure-tls` (local only)
 - HTTP only; oauth2-proxy `cookie-secure=false`; unverified-email allow for SA JWTs
 - ingress-nginx community project retired (pinned chart; not a greenfield bank recommendation)
-- Flux Kustomization intervals: `controllers` / `applications` at **10m**; `keycloak` / `oauth2-proxy` still **1m** for faster local auth iteration
+- Flux Kustomization intervals: `controllers` / `keycloak` / `oauth2-proxy` / `applications` at **10m** (reconcile manually when iterating)
 - Capacitor is laptop-local only
 
 **Production direction (aligned with public platform patterns)**

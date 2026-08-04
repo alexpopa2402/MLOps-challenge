@@ -4,7 +4,7 @@ metadata:
   name: keycloak
   namespace: flux-system
 spec:
-  interval: 1m
+  interval: 10m
   retryInterval: 1m
   timeout: 10m
   path: ./infrastructure/keycloak
